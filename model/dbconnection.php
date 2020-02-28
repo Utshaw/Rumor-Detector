@@ -15,7 +15,7 @@ class DBConn {
         $this->servername = "localhost";
         $this->username = "root";
         $this->password = "";
-        $this->dbname = "Vehicle_Rental_Platform";
+        $this->dbname = "EtherBots";
         $this->charset = "utf8mb4";
 
 

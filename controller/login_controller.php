@@ -12,7 +12,7 @@ $daoObject = DAO::getInstance();
 
 
 
-if(isset($_SESSION["customer_id"])){
+if(isset($_SESSION["user_id"])){
     header("location:index.php");
 
 }else{
@@ -22,18 +22,18 @@ if(isset($_SESSION["customer_id"])){
         if(empty($email) || empty($password)){
             $message = "Please fill up email and password";
         }else{
-            $customer = new Customer();
-            $customer->EMAIL_ADDRESS = $email;
-            $customer->PASSWORD = $password;
-            $results  = $daoObject->loginAttempt($customer);
+            $user = new user();
+            $user->Email = $email;
+            $user->Password = $password;
+            $results  = $daoObject->loginAttempt($user);
 
 
             if(count($results) > 0){
-                $customer_id = $results[0]->CUSTOMER_ID;
-                $customer_name = $results[0]->CONTACT_NAME;
+                $user_id = $results[0]->User_ID;
+                $user_name = $results[0]->Name;
 
-                $_SESSION["customer_name"] = $customer_name;
-                $_SESSION["customer_id"] = $customer_id;
+                $_SESSION["user_name"] = $user_name;
+                $_SESSION["user_id"] = $user_id;
                 header("location:index.php");
 
             }else{
@@ -44,6 +44,11 @@ if(isset($_SESSION["customer_id"])){
 
         }
 
+    }else{
+
+        if($_GET['message'] == "loginfirst") {
+            $message = "You need to login first to cast your vote";
+        }
     }
 }
 

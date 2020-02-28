@@ -2,8 +2,8 @@
 
 session_start();
 
-if(isset($_SESSION["customer_id"])){
-    $session_customer_id = $_SESSION["customer_id"];
-    $session_customer_name = $_SESSION["customer_name"];
+if(isset($_SESSION["user_id"])){
+    $session_user_id = $_SESSION["user_id"];
+    $session_user_name = $_SESSION["user_name"];
 
 }

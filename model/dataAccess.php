@@ -9,6 +9,40 @@ $pdo = $connection->connect();
 class DAO
 {
 
+
+    public function getAllNews()
+    {
+
+        global $pdo;
+        $sql = "SELECT N.News_ID,News, COUNT(News_Authenticate), IFNULL(SUM(News_Authenticate),0) FROM `News` N LEFT JOIN Vote V on N.News_ID=V.News_ID GROUP BY N.News_ID";
+
+        $statement = $pdo->prepare($sql);
+
+        $statement->execute();
+
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+    public function loginAttempt($cust)
+    {
+
+        global $pdo;
+        $sql = "SELECT * FROM User  WHERE Email = :email AND Password = :password";
+        // $sql = "SELECT * FROM User  WHERE Email = :email AND Password = :password AND VERIFICATION_CODE IS NULL AND BLOCKED = 0";
+
+        $statement = $pdo->prepare($sql);
+        $statement->bindValue(':email', $cust->Email, PDO::PARAM_STR);
+        $statement->bindValue(':password', $cust->Password, PDO::PARAM_STR);
+        $statement->execute();
+        $results = $statement->fetchAll(PDO::FETCH_CLASS, 'User');
+
+        return $results;
+    }
+
+
+
     public function getCompanyWithVerificationCode($company)
     {
 
@@ -745,20 +779,7 @@ class DAO
     }
 
 
-    public function loginAttempt($cust)
-    {
 
-        global $pdo;
-        $sql = "SELECT * FROM CUSTOMERS WHERE EMAIL_ADDRESS = :email AND PASSWORD = :password AND VERIFICATION_CODE IS NULL AND BLOCKED = 0";
-
-        $statement = $pdo->prepare($sql);
-        $statement->bindValue(':email', $cust->EMAIL_ADDRESS, PDO::PARAM_STR);
-        $statement->bindValue(':password', $cust->PASSWORD, PDO::PARAM_STR);
-        $statement->execute();
-        $results = $statement->fetchAll(PDO::FETCH_CLASS, 'Customer');
-
-        return $results;
-    }
 
     public function companyLoginAttempt($cust)
     {

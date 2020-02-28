@@ -23,31 +23,31 @@
                 <a class="nav-link" href="promotion.php" >Promotion</a>
             </li> -->
 
-
+<!-- 
             <li class="nav-item">
-                <?php if(isset($session_customer_id)): ?>
+                <?php if(isset($session_user_id)): ?>
                 <a class="nav-link" href="booking.php" >My Bookings</a>
                 <?php endif ?>
-            </li>
+            </li> -->
 
 
 
             <li class="nav-item" >
-                <?php if(isset($session_customer_id)): ?>
-                    <a class="nav-link" href="./logout.php" > Sign Out (<?=$session_customer_name?>)</a>
+                <?php if(isset($session_user_id)): ?>
+                    <a class="nav-link" href="./logout.php" > Sign Out (<?=$session_user_name?>)</a>
                 <?php else: ?>
-                    <a class="nav-link" href="./login.php" > Hot News</a>
+                    <a class="nav-link" href="./login.php" > Sign In</a>
 
                     
                 <?php endif ?>
             </li>
 
-            <li class="nav-item" >
-            <?php if(!isset($session_customer_id)): ?>
+            <!-- <li class="nav-item" >
+            <?php if(!isset($session_user_id)): ?>
                 <a class="nav-link" href="./company/login.php" > All News</a>
 
             <?php endif?>
-            </li>
+            </li> -->
 
         </ul>
 
